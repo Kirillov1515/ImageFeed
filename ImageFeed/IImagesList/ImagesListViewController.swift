@@ -7,8 +7,9 @@
 
 import UIKit
 
-class ImagesListViewController: UIViewController {
+final class ImagesListViewController: UIViewController {
     
+    //MARK: - Variables
     private let photosName: [String] = Array(0..<20).map{ "\($0)" }
     
     private lazy var dateFormatter: DateFormatter = {
@@ -18,14 +19,17 @@ class ImagesListViewController: UIViewController {
         return formatter
     }()
     
-    @IBOutlet private var tableView: UITableView!
+    //MARK: - IBOutlets
+    @IBOutlet private var tableView: UITableView! // Отсутствует модификатор weak, так как в одном из уроков была рекмендация зафиксировать сильную ссылку на таблицу
     
+    //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
     }
     
+    //MARK: - Functions
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         guard let image = UIImage(named: photosName[indexPath.row]) else {
             return
@@ -39,6 +43,7 @@ class ImagesListViewController: UIViewController {
     }
 }
 
+//MARK: - UITableViewDataSource
 extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return photosName.count
@@ -58,6 +63,7 @@ extension ImagesListViewController: UITableViewDataSource {
     
 }
 
+//MARK: - UITableViewDelegate
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {}
     
