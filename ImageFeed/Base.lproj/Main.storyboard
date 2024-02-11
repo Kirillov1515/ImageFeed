@@ -111,14 +111,14 @@
                                     <constraint firstAttribute="width" constant="70" id="z8t-JS-ZBs"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4yF-Zr-7qY">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4yF-Zr-7qY">
                                 <rect key="frame" x="325" y="114" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="4yF-Zr-7qY" secondAttribute="height" multiplier="1:1" id="nEE-0S-PUM"/>
                                     <constraint firstAttribute="width" constant="44" id="zYD-pR-PFQ"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="logout"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="logout"/>
                                 <connections>
                                     <action selector="didTapLogoutButton:" destination="Ihb-hM-Jrp" eventType="touchUpInside" id="ZDf-ga-IwU"/>
                                 </connections>
