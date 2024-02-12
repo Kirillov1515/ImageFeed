@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA11CE662B7996C600F6FADF /* YS Display-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA11CE642B7996C500F6FADF /* YS Display-Bold.ttf */; };
+		FA11CE672B7996C600F6FADF /* YS Display-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA11CE652B7996C500F6FADF /* YS Display-Medium.ttf */; };
 		FA1F2A342B74FF070052D912 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F2A332B74FF070052D912 /* AppDelegate.swift */; };
 		FA1F2A362B74FF070052D912 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F2A352B74FF070052D912 /* SceneDelegate.swift */; };
 		FA1F2A382B74FF070052D912 /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F2A372B74FF070052D912 /* ImagesListViewController.swift */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA11CE642B7996C500F6FADF /* YS Display-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Bold.ttf"; sourceTree = "<group>"; };
+		FA11CE652B7996C500F6FADF /* YS Display-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Medium.ttf"; sourceTree = "<group>"; };
 		FA1F2A302B74FF070052D912 /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA1F2A332B74FF070052D912 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA1F2A352B74FF070052D912 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +47,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA11CE602B79964200F6FADF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FA11CE622B7996C500F6FADF /* Fonts */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		FA11CE622B7996C500F6FADF /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				FA11CE632B7996C500F6FADF /* YS Display */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		FA11CE632B7996C500F6FADF /* YS Display */ = {
+			isa = PBXGroup;
+			children = (
+				FA11CE642B7996C500F6FADF /* YS Display-Bold.ttf */,
+				FA11CE652B7996C500F6FADF /* YS Display-Medium.ttf */,
+			);
+			path = "YS Display";
+			sourceTree = "<group>";
+		};
 		FA1F2A272B74FF070052D912 = {
 			isa = PBXGroup;
 			children = (
@@ -65,11 +94,12 @@
 				FAE7ECDD2B78AFCB00EE7896 /* Profile */,
 				FA1F2A492B753DC20052D912 /* ImagesList */,
 				FAE7ECE02B78D2B000EE7896 /* SingleImage */,
+				FA11CE602B79964200F6FADF /* Resources */,
 				FA1F2A332B74FF070052D912 /* AppDelegate.swift */,
 				FA1F2A352B74FF070052D912 /* SceneDelegate.swift */,
 				FA1F2A392B74FF070052D912 /* Main.storyboard */,
-				FA1F2A3C2B74FF0B0052D912 /* Assets.xcassets */,
 				FA1F2A3E2B74FF0B0052D912 /* LaunchScreen.storyboard */,
+				FA1F2A3C2B74FF0B0052D912 /* Assets.xcassets */,
 				FA1F2A412B74FF0B0052D912 /* Info.plist */,
 			);
 			path = ImageFeed;
@@ -161,6 +191,8 @@
 				FA1F2A402B74FF0B0052D912 /* LaunchScreen.storyboard in Resources */,
 				FA1F2A3D2B74FF0B0052D912 /* Assets.xcassets in Resources */,
 				FA1F2A3B2B74FF070052D912 /* Main.storyboard in Resources */,
+				FA11CE662B7996C600F6FADF /* YS Display-Bold.ttf in Resources */,
+				FA11CE672B7996C600F6FADF /* YS Display-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

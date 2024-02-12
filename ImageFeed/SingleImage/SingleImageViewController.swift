@@ -8,7 +8,6 @@
 import UIKit
 
 final class SingleImageViewController: UIViewController {
-    
     //MARK: - Variables
     var image: UIImage? {
         didSet {

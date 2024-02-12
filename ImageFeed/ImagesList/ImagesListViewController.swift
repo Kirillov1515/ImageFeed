@@ -8,11 +8,9 @@
 import UIKit
 
 final class ImagesListViewController: UIViewController {
-    
     //MARK: - Variables
     private let photosName: [String] = Array(0..<20).map{ "\($0)" }
     private let showSingleImageSegueIdentifire = "ShowSingleImage"
-    
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
@@ -77,8 +75,6 @@ extension ImagesListViewController: UITableViewDataSource {
         configCell(for: imageListCell, with: indexPath)
         return imageListCell
     }
-    
-    
 }
 
 //MARK: - UITableViewDelegate
