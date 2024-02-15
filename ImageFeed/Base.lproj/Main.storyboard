@@ -281,10 +281,10 @@
                                 </wkWebViewConfiguration>
                             </wkWebView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yrW-fS-Ven">
-                                <rect key="frame" x="9" y="9" width="24" height="24"/>
+                                <rect key="frame" x="9" y="9" width="44" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="8g1-YK-d6f"/>
-                                    <constraint firstAttribute="width" constant="24" id="wiG-dg-rsC"/>
+                                    <constraint firstAttribute="height" constant="44" id="8g1-YK-d6f"/>
+                                    <constraint firstAttribute="width" constant="44" id="wiG-dg-rsC"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="nav_back_button"/>
@@ -292,19 +292,27 @@
                                     <action selector="didTapBackButton:" destination="caC-Ie-stj" eventType="touchUpInside" id="wZc-O5-UZ8"/>
                                 </connections>
                             </button>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="QLx-pm-AUd">
+                                <rect key="frame" x="0.0" y="53" width="393" height="4"/>
+                                <color key="progressTintColor" name="YP Black"/>
+                            </progressView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="D7F-2o-ibe"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="SQL-IA-xBk" firstAttribute="top" secondItem="GEu-eQ-WGp" secondAttribute="top" id="4PS-tb-nu3"/>
                             <constraint firstItem="yrW-fS-Ven" firstAttribute="leading" secondItem="D7F-2o-ibe" secondAttribute="leading" constant="9" id="Az6-Hr-1Yc"/>
+                            <constraint firstItem="QLx-pm-AUd" firstAttribute="leading" secondItem="D7F-2o-ibe" secondAttribute="leading" id="Dzy-We-jdW"/>
+                            <constraint firstItem="QLx-pm-AUd" firstAttribute="top" secondItem="yrW-fS-Ven" secondAttribute="bottom" id="Hdo-k2-xJP"/>
                             <constraint firstAttribute="trailing" secondItem="SQL-IA-xBk" secondAttribute="trailing" id="TlB-cY-QTe"/>
                             <constraint firstAttribute="bottom" secondItem="SQL-IA-xBk" secondAttribute="bottom" id="XQB-lb-KgY"/>
+                            <constraint firstItem="D7F-2o-ibe" firstAttribute="trailing" secondItem="QLx-pm-AUd" secondAttribute="trailing" id="ep0-pb-PbF"/>
                             <constraint firstItem="yrW-fS-Ven" firstAttribute="top" secondItem="D7F-2o-ibe" secondAttribute="top" constant="9" id="gSp-QI-U0W"/>
                             <constraint firstItem="SQL-IA-xBk" firstAttribute="leading" secondItem="GEu-eQ-WGp" secondAttribute="leading" id="hj2-xz-69N"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="progressView" destination="QLx-pm-AUd" id="mLf-W3-BRF"/>
                         <outlet property="webView" destination="SQL-IA-xBk" id="qOf-P4-7XU"/>
                     </connections>
                 </viewController>
