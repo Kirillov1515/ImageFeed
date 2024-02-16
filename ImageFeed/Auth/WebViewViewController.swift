@@ -8,8 +8,6 @@
 import UIKit
 import WebKit
 
-fileprivate let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
-
 //MARK: - WebViewViewControllerDelegate
 protocol WebViewViewControllerDelegate: AnyObject {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String)
@@ -32,7 +30,6 @@ final class WebViewViewController: UIViewController {
         webView.navigationDelegate = self
         
         loadWebView()
-        //updateProgress()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,12 +68,12 @@ final class WebViewViewController: UIViewController {
 //MARK: - Private functions
 private extension WebViewViewController {
     func loadWebView() {
-        var urlComponents = URLComponents(string: unsplashAuthorizeURLString)
+        var urlComponents = URLComponents(string: ApiConstants.unsplashAuthorizeURLString)
         urlComponents?.queryItems = [
-            URLQueryItem(name: "client_id", value: accessKey),
-            URLQueryItem(name: "redirect_uri", value: redirectURI),
+            URLQueryItem(name: "client_id", value: ApiConstants.accessKey),
+            URLQueryItem(name: "redirect_uri", value: ApiConstants.redirectURI),
             URLQueryItem(name: "response_type", value: "code"),
-            URLQueryItem(name: "scope", value: accessScope)]
+            URLQueryItem(name: "scope", value: ApiConstants.accessScope)]
         
         if let url = urlComponents?.url {
             let request = URLRequest(url: url)

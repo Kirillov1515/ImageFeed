@@ -7,9 +7,6 @@
 
 import Foundation
 
-fileprivate let unsplashTokenURLString = "https://unsplash.com/oauth/token"
-fileprivate let unsplashTokenRequestURLString = "https://unsplash.com"
-
 final class OAuth2Service {
     //MARK: - Variables
     static let shared = OAuth2Service()
@@ -25,7 +22,7 @@ final class OAuth2Service {
     
     //MARK: - Public methods
     func fetchOAuthToken(_ code: String, completion: @escaping (Result<String, Error>) -> Void) {
-        let request = authTokenRequest(code: code)
+        guard let request = authTokenRequest(code: code) else { return }
         let task = object(for: request) { [weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async {
@@ -57,13 +54,13 @@ private extension OAuth2Service {
         }
     }
     
-    func authTokenRequest(code: String) -> URLRequest {
-        guard let url = URL(string: unsplashTokenRequestURLString) else { preconditionFailure("No url") }
+    func authTokenRequest(code: String) -> URLRequest? {
+        guard let url = URL(string: ApiConstants.unsplashBaseURLString) else { preconditionFailure("No url") }
         return URLRequest.makeHTTPRequest(
             path: "/oauth/token"
-            + "?client_id=\(accessKey)"
-            + "&&client_secret=\(secretKey)"
-            + "&&redirect_uri=\(redirectURI)"
+            + "?client_id=\(ApiConstants.accessKey)"
+            + "&&client_secret=\(ApiConstants.secretKey)"
+            + "&&redirect_uri=\(ApiConstants.redirectURI)"
             + "&&code=\(code)"
             + "&&grant_type=authorization_code",
             httpMethod: "POST",

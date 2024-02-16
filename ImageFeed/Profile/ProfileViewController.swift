@@ -11,7 +11,6 @@ final class ProfileViewController: UIViewController {
     //MARK: - Variables
     private let avatarImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "avatar"))
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -21,7 +20,6 @@ final class ProfileViewController: UIViewController {
             target: ProfileViewController.self,
             action: nil)
         button.tintColor = .ypRed
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -30,7 +28,6 @@ final class ProfileViewController: UIViewController {
         label.text = "Екатерина Новикова"
         label.textColor = .ypWhite
         label.font = UIFont(name: "YSDisplay-Medium", size: 23)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -39,7 +36,6 @@ final class ProfileViewController: UIViewController {
         label.text = "@ekaterina_nov"
         label.textColor = .ypWhite
         label.font = UIFont(name: "YSDisplay-Medium", size: 13)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -48,7 +44,6 @@ final class ProfileViewController: UIViewController {
         label.text = "Hello, world!"
         label.textColor = .ypWhite
         label.font = UIFont(name: "YSDisplay-Medium", size: 13)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -66,11 +61,14 @@ final class ProfileViewController: UIViewController {
     }
     
     private func addViews() {
-        view.addSubview(avatarImageView)
-        view.addSubview(logoutButton)
-        view.addSubview(nameLabel)
-        view.addSubview(loginLabel)
-        view.addSubview(descriptionLabel)
+        [avatarImageView, 
+         logoutButton,
+         nameLabel,
+         loginLabel,
+         descriptionLabel].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview($0)
+        }
     }
     
     private func setupConstraints() {

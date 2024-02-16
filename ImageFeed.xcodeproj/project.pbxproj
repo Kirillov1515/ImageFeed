@@ -94,6 +94,14 @@
 			path = "YS Display";
 			sourceTree = "<group>";
 		};
+		FA157FD72B80108C00070BEF /* API */ = {
+			isa = PBXGroup;
+			children = (
+				FA485E5D2B7E52EA0083D3D8 /* Constants.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		FA1F2A272B74FF070052D912 = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +121,7 @@
 		FA1F2A322B74FF070052D912 /* ImageFeed */ = {
 			isa = PBXGroup;
 			children = (
+				FA157FD72B80108C00070BEF /* API */,
 				FAD8264E2B7F7C560020D6C3 /* Helpers */,
 				FAD8264D2B7F7C1E0020D6C3 /* Models */,
 				FAD826472B7F4D370020D6C3 /* ServiceAccessLayer */,
@@ -121,7 +130,6 @@
 				FAE7ECDD2B78AFCB00EE7896 /* Profile */,
 				FA1F2A492B753DC20052D912 /* ImagesList */,
 				FAE7ECE02B78D2B000EE7896 /* SingleImage */,
-				FA485E5D2B7E52EA0083D3D8 /* Constants.swift */,
 				FA11CE602B79964200F6FADF /* Resources */,
 				FA1F2A332B74FF070052D912 /* AppDelegate.swift */,
 				FA1F2A352B74FF070052D912 /* SceneDelegate.swift */,
