@@ -180,7 +180,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="DY1-aO-PKD">
             <objects>
-                <tabBarController storyboardIdentifier="TabBarViewController" id="zqw-OX-Hqx" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarViewController" id="zqw-OX-Hqx" customClass="TabBarController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qGn-US-nvh">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -193,7 +193,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DBP-fV-8Eb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7" y="-286"/>
+            <point key="canvasLocation" x="7" y="-625"/>
         </scene>
         <!--Auth-->
         <scene sceneID="2fn-No-jbD">
@@ -303,7 +303,7 @@
         <!--Navigation Controller-->
         <scene sceneID="nB3-oc-95i">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="whc-jd-4HN" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="whc-jd-4HN" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="43w-Ca-ArC">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>

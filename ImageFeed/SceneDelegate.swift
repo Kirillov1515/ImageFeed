@@ -18,7 +18,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.isHidden = false
         let splashViewController = SplashViewController()
         window?.rootViewController = splashViewController
-        //window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
