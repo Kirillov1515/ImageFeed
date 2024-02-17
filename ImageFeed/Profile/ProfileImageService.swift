@@ -27,7 +27,7 @@ final class ProfileImageService {
     private init() {}
     
     //MARK: - Functions
-    func fetchProfileImageURL(token: String, username: String, _ completion: @escaping (Result<String, Error>) -> Void){
+    func fetchProfileImageURL(token: String, username: String, _ completion: @escaping (Result<String, Error>) -> Void) {
         assert(Thread.isMainThread)
         if avatarURL != nil { return }
         task?.cancel()

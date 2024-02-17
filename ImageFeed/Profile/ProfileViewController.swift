@@ -13,7 +13,6 @@ final class ProfileViewController: UIViewController {
     private var profileImageServiceObserver: NSObjectProtocol?
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
-    //private var label: UILabel?
     
     private let avatarImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "avatar"))
