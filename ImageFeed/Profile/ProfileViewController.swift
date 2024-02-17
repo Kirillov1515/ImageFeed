@@ -6,12 +6,16 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class ProfileViewController: UIViewController {
     //MARK: - Variables
+    private var profileImageServiceObserver: NSObjectProtocol?
+    private let profileService = ProfileService.shared
+    private let profileImageService = ProfileImageService.shared
+    
     private let avatarImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "avatar"))
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -21,7 +25,6 @@ final class ProfileViewController: UIViewController {
             target: ProfileViewController.self,
             action: nil)
         button.tintColor = .ypRed
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -30,7 +33,6 @@ final class ProfileViewController: UIViewController {
         label.text = "Екатерина Новикова"
         label.textColor = .ypWhite
         label.font = UIFont(name: "YSDisplay-Medium", size: 23)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -39,7 +41,6 @@ final class ProfileViewController: UIViewController {
         label.text = "@ekaterina_nov"
         label.textColor = .ypWhite
         label.font = UIFont(name: "YSDisplay-Medium", size: 13)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -48,29 +49,75 @@ final class ProfileViewController: UIViewController {
         label.text = "Hello, world!"
         label.textColor = .ypWhite
         label.font = UIFont(name: "YSDisplay-Medium", size: 13)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
     
     //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .ypBlack
         setupViews()
+        updateProfileDetails(profile: profileService.profile)
     }
     
     //MARK: - Functions
+    private func updateProfileDetails(profile: Profile?) {
+        guard let profile = profile else { return }
+        nameLabel.text = profile.name
+        loginLabel.text = profile.loginName
+        descriptionLabel.text = profile.bio
+        
+        profileImageServiceObserver = NotificationCenter.default.addObserver(
+            forName: ProfileImageService.didChangeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            guard let self = self else { return }
+            self.updateAvatar()
+        }
+        updateAvatar()
+    }
+    
+    private func updateAvatar() {
+        guard
+            let avatarURL = profileImageService.avatarURL,
+            let url = URL(string: avatarURL)
+        else { return }
+        
+        let cache = ImageCache.default
+        cache.clearMemoryCache()
+        cache.clearDiskCache()
+        
+        let avatarPlaceholderImage = UIImage(named: "avatar_placeholder")
+        
+        let processor = RoundCornerImageProcessor(cornerRadius: 61)
+        avatarImageView.kf.indicatorType = .activity
+        avatarImageView.kf.setImage(
+            with: url,
+            placeholder: avatarPlaceholderImage,
+            options: [.processor(processor)]
+        )
+    }
+    
     private func setupViews() {
         addViews()
         setupConstraints()
     }
     
     private func addViews() {
-        view.addSubview(avatarImageView)
-        view.addSubview(logoutButton)
-        view.addSubview(nameLabel)
-        view.addSubview(loginLabel)
-        view.addSubview(descriptionLabel)
+        [avatarImageView, 
+         logoutButton,
+         nameLabel,
+         loginLabel,
+         descriptionLabel].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview($0)
+        }
     }
     
     private func setupConstraints() {
