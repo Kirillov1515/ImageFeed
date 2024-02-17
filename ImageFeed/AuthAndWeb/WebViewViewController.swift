@@ -18,6 +18,14 @@ protocol WebViewViewControllerDelegate: AnyObject {
 final class WebViewViewController: UIViewController {
     //MARK: - Variables
     weak var delegate: WebViewViewControllerDelegate?
+    private var estimatedProgressObservation: NSKeyValueObservation?
+    private var alertPresenter: AlertPresenterProtocol?
+    private struct WebKeys {
+        static let clientId = "client_id"
+        static let redirectUri = "redirect_uri"
+        static let responseType = "response_type"
+        static let scope = "scope"
+    }
     
     //MARK: - IBOutlets
     @IBOutlet private weak var webView: WKWebView!
@@ -29,7 +37,9 @@ final class WebViewViewController: UIViewController {
         
         webView.navigationDelegate = self
         
+        updateProgress()
         loadWebView()
+        addEstimatedProgressObservation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,6 +90,36 @@ private extension WebViewViewController {
             webView.load(request)
         }
     }
+    
+    func addEstimatedProgressObservation() {
+        estimatedProgressObservation = webView.observe(
+            \.estimatedProgress,
+             options: [],
+             changeHandler: { [weak self] _, _ in
+                 guard let self = self else { return }
+                 self.updateProgress()
+             }
+        )
+    }
+    
+    func showErrorAlert(message: String = "Не удалось войти в систему") {
+        let alert = AlertModel(title: "Что-то пошло не так(",
+                               message: message,
+                               buttonText: "Ок",
+                               completion: { [weak self] in
+            guard let self = self else { return }
+            dismiss(animated: true)
+        })
+        alertPresenter = AlertPresenter(delagate: self)
+        alertPresenter?.show(alertModel: alert)
+    }
+}
+
+//MARK: - AlertPresenterDelegate
+extension WebViewViewController: AlertPresenterDelegate {
+    func present(alert: UIAlertController, animated flag: Bool) {
+        self.present(alert, animated: flag)
+    }
 }
 
 //MARK: - WKNavigationDelegate
@@ -97,11 +137,15 @@ extension WebViewViewController: WKNavigationDelegate {
         }
     }
     
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        showErrorAlert()
+    }
+    
     private func code(from navigationAction: WKNavigationAction) -> String? {
         if
             let url = navigationAction.request.url,
             let urlComponents = URLComponents(string: url.absoluteString),
-            urlComponents.path == "/oauth/authorize/native",
+            urlComponents.path == ApiConstants.authorizePath,
             let items = urlComponents.queryItems,
             let codeItem = items.first(where: { $0.name == "code" })
         {

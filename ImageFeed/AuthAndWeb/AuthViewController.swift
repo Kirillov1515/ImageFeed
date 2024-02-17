@@ -20,7 +20,9 @@ final class AuthViewController: UIViewController {
     //MARK: - Functions
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showWebViewSegueIdentifire {
-            guard let webViewViewController = segue.destination as? WebViewViewController else { fatalError("Failed to prepare for \(showWebViewSegueIdentifire)") }
+            guard let webViewViewController = segue.destination as? WebViewViewController else { assertionFailure("Failed to prepare for \(showWebViewSegueIdentifire)")
+                return
+            }
             webViewViewController.delegate = self
         } else {
             super.prepare(for: segue, sender: sender)
@@ -36,5 +38,12 @@ extension AuthViewController: WebViewViewControllerDelegate {
     
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
         dismiss(animated: true)
+    }
+}
+
+//MARK: - AlertPresenterDelegate
+extension AuthViewController: AlertPresenterDelegate {
+    func present(alert: UIAlertController, animated flag: Bool) {
+        self.present(alert, animated: flag)
     }
 }

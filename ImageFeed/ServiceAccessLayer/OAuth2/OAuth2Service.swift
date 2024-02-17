@@ -11,48 +11,65 @@ final class OAuth2Service {
     //MARK: - Variables
     static let shared = OAuth2Service()
     private let urlSession = URLSession.shared
+    private var task: URLSessionTask?
+    private var lastCode: String?
+    
     private (set) var authToken: String? {
         get {
-            return OAuth2TokenStorage().token
+            let tokenStorage = OAuth2TokenStorage()
+            return tokenStorage.token
         }
         set {
-            OAuth2TokenStorage().token = newValue
+            let tokenStorage = OAuth2TokenStorage()
+            tokenStorage.token = newValue
         }
     }
     
+    private init() {}
+    
     //MARK: - Public methods
     func fetchOAuthToken(_ code: String, completion: @escaping (Result<String, Error>) -> Void) {
+        assert(Thread.isMainThread)
+        if lastCode == code { return }
+        task?.cancel()
+        lastCode = code
+        
         guard let request = authTokenRequest(code: code) else { return }
-        let task = object(for: request) { [weak self] result in
-            guard let self = self else { return }
+        
+        let task = urlSession.objectTask(for: request) { [weak self] (result: Result<OAuthTokenResponseBody, Error>) in
             DispatchQueue.main.async {
+                guard let self = self else { return }
                 switch result {
                 case .success(let body):
-                    self.authToken = body.accessToken
-                    completion(.success(body.accessToken))
+                    let authToken = body.accessToken
+                    self.authToken = authToken
+                    completion(.success(authToken))
+                    self.task = nil
                 case .failure(let error):
                     completion(.failure(error))
+                    self.lastCode = nil
                 }
             }
         }
         
+        self.task = task
         task.resume()
     }
 }
 
 //MARK: - Private methods
 private extension OAuth2Service {
-    func object(for request: URLRequest, completion: @escaping (Result<OAuthTokenResponseBody,Error>) -> Void) -> URLSessionTask {
-        let decoder = JSONDecoder()
-        return urlSession.fetchData(for: request) { (result: Result<Data, Error>) in
-            let response = result.flatMap { data -> Result<OAuthTokenResponseBody, Error> in
-                Result {
-                    try decoder.decode(OAuthTokenResponseBody.self, from: data)
-                }
-            }
-            completion(response)
-        }
-    }
+//    func object(for request: URLRequest, completion: @escaping (Result<OAuthTokenResponseBody,Error>) -> Void) -> URLSessionTask {
+//        let decoder = JSONDecoder()
+//        return urlSession.fetchData(for: request) { (result: Result<Data, Error>) in
+//            let response = result.flatMap { data -> Result<OAuthTokenResponseBody, Error> in
+//                Result {
+//                    try decoder.decode(OAuthTokenResponseBody.self, from: data)
+//                }
+//            }
+//            completion(response)
+//        }
+//    }
     
     func authTokenRequest(code: String) -> URLRequest? {
         guard let url = URL(string: ApiConstants.unsplashBaseURLString) else { preconditionFailure("No url") }
